@@ -1,4 +1,4 @@
-package com.facundosaracho.weatherapi.presentation;
+package com.facundosaracho.weatherapi.presentation.controller;
 
 import com.facundosaracho.weatherapi.business.service.WeatherService;
 import com.facundosaracho.weatherapi.presentation.dto.WeatherDataDto;
