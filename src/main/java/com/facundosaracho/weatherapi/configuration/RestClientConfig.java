@@ -1,5 +1,6 @@
 package com.facundosaracho.weatherapi.configuration;
 
+import com.facundosaracho.weatherapi.client.weather.configuration.WeatherApiRetrofitConfig;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +9,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Configuration
-public class RetrofitConfig {
+public class RestClientConfig {
 
     @Value("${weatherApiUrl}")
     private String weatherApiUrl;
