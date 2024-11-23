@@ -3,13 +3,15 @@ package com.facundosaracho.weatherapi.client.weather.impl;
 import com.facundosaracho.weatherapi.business.model.client.weatherpapi.WeatherApiResponse;
 import com.facundosaracho.weatherapi.client.weather.WeatherApiClientService;
 import com.facundosaracho.weatherapi.client.weather.configuration.WeatherApiRetrofitConfig;
-import com.facundosaracho.weatherapi.exception.ClientException;
 import com.facundosaracho.weatherapi.exception.ErrorDetails;
+import com.facundosaracho.weatherapi.exception.RestException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
 import retrofit2.Response;
+
+import static com.facundosaracho.weatherapi.configuration.RestClientConfig.handleRetrofitCalls;
 
 @Service
 @AllArgsConstructor
@@ -25,18 +27,10 @@ public class WeatherClientServiceImpl implements WeatherApiClientService {
         return response;
     }
 
-    private void validateResponse(Response<WeatherApiResponse> responseResponse) throws ClientException {
+    private void validateResponse(Response<WeatherApiResponse> responseResponse) {
         if (responseResponse == null || !responseResponse.isSuccessful())
-            throw new ClientException(ErrorDetails.WEATHER_NOT_FOUND.getCode(),
+            throw new RestException(ErrorDetails.WEATHER_NOT_FOUND.getCode(),
                     ErrorDetails.WEATHER_NOT_FOUND.getMessage(),
                     HttpStatus.NOT_FOUND);
-    }
-
-    private <R> Response<R> handleRetrofitCalls(Call<R> call) {
-        try {
-            return call.execute();
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
     }
 }

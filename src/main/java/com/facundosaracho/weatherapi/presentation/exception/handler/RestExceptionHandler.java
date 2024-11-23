@@ -1,6 +1,6 @@
 package com.facundosaracho.weatherapi.presentation.exception.handler;
 
-import com.facundosaracho.weatherapi.exception.BusinessException;
+import com.facundosaracho.weatherapi.exception.RestException;
 import com.facundosaracho.weatherapi.presentation.exception.model.ErrorResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +12,8 @@ import static com.facundosaracho.weatherapi.exception.ErrorDetails.GENERIC_EXCEP
 @ControllerAdvice
 public class RestExceptionHandler {
 
-    @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ErrorResponseDto> handleBusinessException(BusinessException businessException) {
+    @ExceptionHandler(RestException.class)
+    public ResponseEntity<ErrorResponseDto> handleBusinessException(RestException businessException) {
         return new ResponseEntity<>(new ErrorResponseDto(
                 businessException.getCode(),
                 businessException.getMessage()),
@@ -21,7 +21,7 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    ResponseEntity<ErrorResponseDto> handleGenericException(Exception e) {
+    ResponseEntity<ErrorResponseDto> handleGenericException() {
         return new ResponseEntity<>(new ErrorResponseDto(
                 GENERIC_EXCEPTION.getCode(),
                 GENERIC_EXCEPTION.getMessage()),

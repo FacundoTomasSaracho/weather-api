@@ -22,7 +22,5 @@ public class WeatherController {
 
         return new ResponseEntity<>(WeatherMapper.INSTANCE.toWeatherDto(weatherService.getWeaterInformation()), HttpStatus.OK);
     }
-
-
 }
 

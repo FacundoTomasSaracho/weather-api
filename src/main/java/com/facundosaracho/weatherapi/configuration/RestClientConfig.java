@@ -5,6 +5,8 @@ import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -27,5 +29,13 @@ public class RestClientConfig {
     @Bean
     public WeatherApiRetrofitConfig weatherApiRetrofitConfig(Retrofit retrofit) {
         return retrofit.create(WeatherApiRetrofitConfig.class);
+    }
+
+    public static <R> Response<R> handleRetrofitCalls(Call<R> call) {
+        try {
+            return call.execute();
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
     }
 }
