@@ -20,7 +20,7 @@ public class WeatherController {
     @GetMapping()
     ResponseEntity<WeatherDataDto> getWeatherInformation() throws Exception {
 
-        return new ResponseEntity<>(WeatherMapper.INSTANCE.toWeatherDto(weatherService.getWeaterInformation()), HttpStatus.OK);
+        return new ResponseEntity<>(WeatherMapper.INSTANCE.toWeatherDto(weatherService.getWeatherInformation()), HttpStatus.OK);
     }
 }
 

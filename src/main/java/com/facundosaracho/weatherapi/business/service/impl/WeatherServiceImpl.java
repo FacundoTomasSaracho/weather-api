@@ -21,7 +21,7 @@ public class WeatherServiceImpl implements WeatherService {
     private String apikey;
 
     @Override
-    public WeatherData getWeaterInformation() {
+    public WeatherData getWeatherInformation() {
         Response<WeatherApiResponse> response = weatherApiClientService.getWeatherByCity(apikey, "Madrid");
         WeatherApiResponse weatherApiResponse = response.body();
         WeatherApiResponse.Condition condition = weatherApiResponse.getCurrent().getCondition();
