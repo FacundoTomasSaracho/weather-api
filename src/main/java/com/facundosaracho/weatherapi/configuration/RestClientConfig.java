@@ -25,12 +25,11 @@ public class RestClientConfig {
     private String weatherApiUrl;
 
     @Bean
-    Retrofit retrofit() {
-        OkHttpClient okHttpClient = new OkHttpClient();
+    Retrofit retrofitConfigurationForWeatherApi() {
         return new Retrofit
                 .Builder()
                 .baseUrl(weatherApiUrl)
-                .client(okHttpClient)
+                .client(new OkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create()).build();
     }
 
