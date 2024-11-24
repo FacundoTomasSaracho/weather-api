@@ -15,6 +15,7 @@ public interface WeatherMapper {
     @Mapping(target = "city", source = "location.name")
     @Mapping(target = "weather", source = "current.condition.text")
     WeatherData toWeatherData(WeatherApiResponse weatherApiResponse);
+
     WeatherDataDto toWeatherDto(WeatherData weatherData);
 
 }
