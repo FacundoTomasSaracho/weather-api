@@ -4,5 +4,5 @@ import com.facundosaracho.weatherapi.business.model.client.weatherpapi.WeatherAp
 import retrofit2.Response;
 
 public interface WeatherApiClientService {
-    Response<WeatherApiResponse> getWeatherByCity(String apiKey, String city);
+    WeatherApiResponse getWeatherByCity(String apiKey, String city);
 }

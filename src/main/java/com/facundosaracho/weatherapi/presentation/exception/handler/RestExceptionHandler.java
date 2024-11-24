@@ -13,19 +13,21 @@ import static com.facundosaracho.weatherapi.exception.ErrorDetails.GENERIC_EXCEP
 public class RestExceptionHandler {
 
     @ExceptionHandler(RestException.class)
-    public ResponseEntity<ErrorResponseDto> handleBusinessException(RestException businessException) {
-        return new ResponseEntity<>(new ErrorResponseDto(
-                businessException.getCode(),
-                businessException.getMessage()),
-                businessException.getHttpStatusCode());
+    public ResponseEntity<ErrorResponseDto> handleBusinessException(RestException restException) {
+        return new ResponseEntity<>(formErrorDto(restException), restException.getHttpStatusCode());
     }
 
     @ExceptionHandler(Exception.class)
     ResponseEntity<ErrorResponseDto> handleGenericException() {
-        return new ResponseEntity<>(new ErrorResponseDto(
-                GENERIC_EXCEPTION.getCode(),
-                GENERIC_EXCEPTION.getMessage()),
-                HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(formGenericErrorDto(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private ErrorResponseDto formErrorDto(RestException restException) {
+        return new ErrorResponseDto(restException.getErrorDetails().getCode(), restException.getErrorDetails().getMessage());
+    }
+
+    private ErrorResponseDto formGenericErrorDto() {
+        return new ErrorResponseDto(GENERIC_EXCEPTION.getCode(), GENERIC_EXCEPTION.getMessage());
     }
 }
 

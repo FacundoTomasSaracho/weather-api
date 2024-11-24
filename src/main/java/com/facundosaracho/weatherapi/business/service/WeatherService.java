@@ -4,5 +4,5 @@ import com.facundosaracho.weatherapi.business.model.WeatherData;
 
 public interface WeatherService {
 
-    WeatherData getWeatherInformation();
+    WeatherData getWeatherInformation(String city);
 }
